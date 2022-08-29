@@ -1,8 +1,8 @@
-import Routes from "./Containers/Routes";
+import AppRoutes from "./Containers/Routes/Routes";
 
 function App() {
   return (
-    <Routes />
+    <AppRoutes />
   );
 }
 
