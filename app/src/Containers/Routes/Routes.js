@@ -13,7 +13,16 @@ function PrivateRoute({children}) {
   return localStorage.getItem('auth') ? <AdminInterface>{children}</AdminInterface> : <Navigate to="/login" />
 }
 
-const mdTheme = createTheme();
+const mdTheme = createTheme({
+  palette: {
+    primary: {
+      main: '#f44336'
+    },
+    secondary: {
+      main: '#3f51b5'
+    }
+  }
+});
 
 function Routes() {
   return useRoutes([

@@ -6,7 +6,6 @@ import Box from '@mui/material/Box';
 import MuiAppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import List from '@mui/material/List';
-import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import Badge from '@mui/material/Badge';
@@ -15,8 +14,28 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import { mainListItems, secondaryListItems } from './listItems';
+import { Slide, Typography, useScrollTrigger } from '@mui/material';
+import logo from './../../Images/biigLogo.png';
 
 const drawerWidth = 220;
+
+function HideOnScroll(props) {
+  const { children, window } = props;
+
+  // Note that you normally won't need to set the window ref as useScrollTrigger
+  // will default to window.
+  // This is only being set here because the demo is in an iframe.
+
+  const trigger = useScrollTrigger({
+    target: window ? window() : undefined,
+  });
+
+  return (
+    <Slide appear={false} direction="down" in={!trigger}>
+      {children}
+    </Slide>
+  );
+}
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== 'open',
@@ -70,36 +89,37 @@ export default function AdminInterface(props) {
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <AppBar position="absolute" open={open}>
-        <Toolbar>
-          <IconButton
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            onClick={toggleDrawer}
-            sx={{
-              marginRight: '36px',
-              ...(open && { display: 'none' }),
-            }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography
-            component="h1"
-            variant="h6"
-            color="inherit"
-            noWrap
-            sx={{ flexGrow: 1 }}
-          >
-            Resumo
-          </Typography>
-          <IconButton color="inherit">
-            <Badge badgeContent={4} color="secondary">
-              <NotificationsIcon />
-            </Badge>
-          </IconButton>
-        </Toolbar>
-      </AppBar>
+      <HideOnScroll {...props}>
+        <AppBar  style={{ background: 'white'}} position="absolute" open={open}>
+          <Toolbar style={{paddingLeft: 20}}>
+            <IconButton
+              edge="start"
+              aria-label="open drawer"
+              onClick={toggleDrawer}
+              sx={{
+                ...(open && { display: 'none' }),
+              }}
+            >
+              <MenuIcon />
+            </IconButton>
+            <img style={{ height: 30, marginLeft: 10, marginRight: 20}} src={logo} alt={'logo'} />
+            <Typography
+              component="h1"
+              variant="h6"
+              color="GrayText"
+              noWrap
+              sx={{ flexGrow: 1 }}
+            >
+              Resumo
+            </Typography>
+            <IconButton >
+              <Badge badgeContent={4} color="primary">
+                <NotificationsIcon />
+              </Badge>
+            </IconButton>
+          </Toolbar>
+        </AppBar>
+      </HideOnScroll>
       <Drawer variant="permanent" open={open}>
         <Toolbar
           sx={{
