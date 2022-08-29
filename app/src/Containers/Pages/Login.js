@@ -7,7 +7,8 @@ import Checkbox from '@mui/material/Checkbox';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import logo from './../../Images/biigLogo.png'
+import logo from './../../Images/biigLogo.png';
+import Copyright from './../UI/Copyright';
 
 export default function Login() {
   const handleSubmit = (event) => {
@@ -70,6 +71,8 @@ export default function Login() {
 
         </Box>
       </Box>
+
+      <Copyright />
     </Container>
   );
 }
