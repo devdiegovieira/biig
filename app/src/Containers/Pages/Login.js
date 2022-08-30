@@ -9,8 +9,11 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import logo from './../../Images/biigLogo.png';
 import Copyright from './../UI/Copyright';
+import { useNavigate } from 'react-router-dom';
 
 export default function Login() {
+  let navigate = useNavigate();
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -18,6 +21,8 @@ export default function Login() {
       email: data.get('email'),
       password: data.get('password'),
     });
+    localStorage.setItem('auth', '12345')
+    navigate('/admin');
   };
 
   return (

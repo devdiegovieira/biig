@@ -16,19 +16,22 @@ function PrivateRoute({children}) {
 const mdTheme = createTheme({
   palette: {
     primary: {
-      main: '#f44336'
+      main: '#db4848'
     },
     secondary: {
-      main: '#3f51b5'
+      main: '#eeaaaa'
     }
   }
 });
 
 function Routes() {
   return useRoutes([
+    { path: '/', element: <Login/> },
     { path: '/login', element: <Login/> },
-    { path: '/', element: <PrivateRoute><Dashboard/></PrivateRoute> },
-    
+    { path: '/admin', element: <PrivateRoute><Dashboard/></PrivateRoute> },
+    { path: '/admin/publishes', element: <PrivateRoute/> },
+    { path: '/admin/orders', element: <PrivateRoute/> },
+    { path: '/admin/payments', element: <PrivateRoute/> },
   ])
 }
 

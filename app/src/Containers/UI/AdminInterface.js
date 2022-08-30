@@ -5,54 +5,25 @@ import MuiDrawer from '@mui/material/Drawer';
 import Box from '@mui/material/Box';
 import MuiAppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
-import List from '@mui/material/List';
-import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import Badge from '@mui/material/Badge';
 import Container from '@mui/material/Container';
 import MenuIcon from '@mui/icons-material/Menu';
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
-import { mainListItems, secondaryListItems } from './listItems';
-import { Slide, Typography, useScrollTrigger } from '@mui/material';
+import { Avatar, Typography } from '@mui/material';
 import logo from './../../Images/biigLogo.png';
+import AdminMenu from './AdminMenu';
 
-const drawerWidth = 220;
+const drawerWidth = 200;
 
-function HideOnScroll(props) {
-  const { children, window } = props;
 
-  // Note that you normally won't need to set the window ref as useScrollTrigger
-  // will default to window.
-  // This is only being set here because the demo is in an iframe.
 
-  const trigger = useScrollTrigger({
-    target: window ? window() : undefined,
-  });
-
-  return (
-    <Slide appear={false} direction="down" in={!trigger}>
-      {children}
-    </Slide>
-  );
-}
-
-const AppBar = styled(MuiAppBar, {
-  shouldForwardProp: (prop) => prop !== 'open',
-})(({ theme, open }) => ({
+const AppBar = styled(MuiAppBar)(({ theme }) => ({
   zIndex: theme.zIndex.drawer + 1,
   transition: theme.transitions.create(['width', 'margin'], {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
-  }),
-  ...(open && {
-    marginLeft: drawerWidth,
-    width: `calc(100% - ${drawerWidth}px)`,
-    transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  }),
+  })
 }));
 
 const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
@@ -81,7 +52,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 export default function AdminInterface(props) {
   const { children } = props;
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState(false);
   const toggleDrawer = () => {
     setOpen(!open);
   };
@@ -89,63 +60,58 @@ export default function AdminInterface(props) {
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <HideOnScroll {...props}>
-        <AppBar  style={{ background: 'white'}} position="absolute" open={open}>
-          <Toolbar style={{paddingLeft: 20}}>
-            <IconButton
-              edge="start"
-              aria-label="open drawer"
-              onClick={toggleDrawer}
-              sx={{
-                ...(open && { display: 'none' }),
-              }}
-            >
-              <MenuIcon />
-            </IconButton>
-            <img style={{ height: 30, marginLeft: 10, marginRight: 20}} src={logo} alt={'logo'} />
-            <Typography
-              component="h1"
-              variant="h6"
-              color="GrayText"
-              noWrap
-              sx={{ flexGrow: 1 }}
-            >
-              Resumo
-            </Typography>
-            <IconButton >
-              <Badge badgeContent={4} color="primary">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
-          </Toolbar>
-        </AppBar>
-      </HideOnScroll>
-      <Drawer variant="permanent" open={open}>
-        <Toolbar
-          sx={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'flex-end',
-            px: [1],
-          }}
-        >
-          <IconButton onClick={toggleDrawer}>
-            <ChevronLeftIcon />
+      <AppBar 
+        style={{ background: 'rgba(255,255,255,0.9)', position: 'fixed', zIndex: 1400 }} 
+        sx={{ boxShadow: 'none' }} 
+        
+        open={open}
+      >
+        <Toolbar style={{ paddingLeft: 20, paddingRight: 10 }}>
+          <IconButton
+            edge="start"
+            aria-label="open drawer"
+            onClick={toggleDrawer}
+          >
+            <MenuIcon />
+          </IconButton>
+          <img style={{ height: 35, marginLeft: 10, marginRight: 20 }} src={logo} alt={'logo'} />
+          <Typography
+            component="h1"
+            variant="h6"
+            color="GrayText"
+            noWrap
+            sx={{ flexGrow: 1 }}
+          >
+            Resumo
+          </Typography>
+          <IconButton >
+            <Badge badgeContent={4} color="primary">
+              <NotificationsIcon />
+            </Badge>
+          </IconButton>
+          <IconButton style={{ marginLeft: 10 }}>
+            <Avatar
+              alt="Remy Sharp"
+              src="/static/images/avatar/2.jpg"
+              sx={{ width: 40, height: 40 }}
+            />
           </IconButton>
         </Toolbar>
-        <Divider />
-        <List component="nav">
-          {mainListItems}
-          <Divider sx={{ my: 1 }} />
-          {secondaryListItems}
-        </List>
+      </AppBar>
+      <Drawer 
+        variant="permanent" 
+        PaperProps={{style: {border: 'none'}}}
+        style={{marginTop: 56, background: 'rgba(255,255,255,0.9)'}}
+        open={open}
+      >
+        <AdminMenu open={open} />
       </Drawer>
       <Box
         component="main"
         sx={{
           backgroundColor: (theme) =>
             theme.palette.mode === 'light'
-              ? theme.palette.grey[100]
+              ? theme.palette.grey[50]
               : theme.palette.grey[900],
           flexGrow: 1,
           height: '100vh',
