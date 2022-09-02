@@ -11,12 +11,10 @@ import Container from '@mui/material/Container';
 import MenuIcon from '@mui/icons-material/Menu';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import { Avatar, Typography } from '@mui/material';
-import logo from './../../Images/biigLogo.png';
+import logo from './../../images/biigLogo.png';
 import AdminMenu from './AdminMenu';
 
 const drawerWidth = 200;
-
-
 
 const AppBar = styled(MuiAppBar)(({ theme }) => ({
   zIndex: theme.zIndex.drawer + 1,

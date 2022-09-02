@@ -1,4 +1,4 @@
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material/styles';
 import React from "react";
 import {
   BrowserRouter,
@@ -6,28 +6,24 @@ import {
   useRoutes
 } from "react-router-dom";
 import Dashboard from "../Pages/Dashboard/Dashboard";
-import AdminInterface from '../UI/AdminInterface';
+import AdminInterface from '../../Components/UI/AdminInterface';
 import Login from "../Pages/Login";
+import defaultTheme from "../../style/defaultTheme"
 
-function PrivateRoute({children}) {
-  return localStorage.getItem('auth') ? <AdminInterface>{children}</AdminInterface> : <Navigate to="/login" />
+function Logout() {
+  localStorage.removeItem('auth');
+  return (<Navigate to="/login" />)
 }
 
-const mdTheme = createTheme({
-  palette: {
-    primary: {
-      main: '#db4848'
-    },
-    secondary: {
-      main: '#eeaaaa'
-    }
-  }
-});
+function PrivateRoute({children}) {
+  return localStorage.getItem('auth') ? <AdminInterface>{children}</AdminInterface> : <Navigate to="/logout" />
+}
 
 function Routes() {
   return useRoutes([
     { path: '/', element: <Login/> },
     { path: '/login', element: <Login/> },
+    { path: '/logout', element: <Logout/> },
     { path: '/admin', element: <PrivateRoute><Dashboard/></PrivateRoute> },
     { path: '/admin/publishes', element: <PrivateRoute/> },
     { path: '/admin/orders', element: <PrivateRoute/> },
@@ -38,7 +34,7 @@ function Routes() {
 export default function AppRoutes() {
 
   return (
-    <ThemeProvider theme={mdTheme}>
+    <ThemeProvider theme={defaultTheme}>
       <BrowserRouter>
         <Routes />
       </BrowserRouter>

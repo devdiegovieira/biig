@@ -7,22 +7,26 @@ import Checkbox from '@mui/material/Checkbox';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import logo from './../../Images/biigLogo.png';
-import Copyright from './../UI/Copyright';
+import logo from './../../images/biigLogo.png';
+import Copyright from './../../Components/UI/Copyright';
 import { useNavigate } from 'react-router-dom';
+import api from '../../api';
 
 export default function Login() {
   let navigate = useNavigate();
+  const [loginData, setLoginData] = React.useState({});
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-    localStorage.setItem('auth', '12345')
-    navigate('/admin');
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    api.post('auth/login', loginData).then(ret => {
+      localStorage.setItem('auth', ret.data)
+      navigate('/admin');
+  
+    }).catch(err => {
+      console.log(err)
+    })
+
   };
 
   return (
@@ -50,6 +54,7 @@ export default function Login() {
             name="email"
             autoComplete="email"
             autoFocus
+            onChange={e => setLoginData({...loginData, mail: e.target.value})}
           />
           <TextField
             margin="normal"
@@ -60,6 +65,7 @@ export default function Login() {
             type="password"
             id="password"
             autoComplete="current-password"
+            onChange={e => setLoginData({...loginData, password: e.target.value})}
           />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}

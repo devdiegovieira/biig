@@ -32,7 +32,7 @@ let menuItems = [
   {
     title: 'Sair',
     icon: 'logout',
-    link: '/login'
+    link: '/logout'
   },
 ]
 
@@ -44,18 +44,19 @@ export default function AdminMenu(props) {
 
   return (
     <List component="nav">
-      {menuItems.map(m => {
-        return m.title == '-' ? <Divider /> :
+      {menuItems.map((m, i) => {
+        return m.title == '-' ? <Divider key={i}/> :
           <Tooltip
             TransitionComponent={Zoom}
             placement="right"
             arrow
             title={!open ? m.title : ''}
+            key={i}
           >
             <ListItemButton
               selected={window.location.pathname == m.link}
               onClick={() => { navigate(m.link) }}
-              key={m.link}
+              key={i}
             >
               <ListItemIcon>
                 <Icon
