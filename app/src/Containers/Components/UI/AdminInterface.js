@@ -11,7 +11,7 @@ import Container from '@mui/material/Container';
 import MenuIcon from '@mui/icons-material/Menu';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import { Avatar, Typography } from '@mui/material';
-import logo from './../../images/biigLogo.png';
+import logo from './../../../images/biigLogo.png';
 import AdminMenu from './AdminMenu';
 
 const drawerWidth = 200;
@@ -55,6 +55,8 @@ export default function AdminInterface(props) {
     setOpen(!open);
   };
 
+  const [pageTitle, setPageTitle] = React.useState('');
+
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
@@ -80,7 +82,7 @@ export default function AdminInterface(props) {
             noWrap
             sx={{ flexGrow: 1 }}
           >
-            Resumo
+            {pageTitle}
           </Typography>
           <IconButton >
             <Badge badgeContent={4} color="primary">
@@ -90,7 +92,7 @@ export default function AdminInterface(props) {
           <IconButton style={{ marginLeft: 10 }}>
             <Avatar
               alt="Remy Sharp"
-              src="/static/images/avatar/2.jpg"
+              src={JSON.parse(localStorage.getItem('user')).picture}
               sx={{ width: 40, height: 40 }}
             />
           </IconButton>
@@ -102,7 +104,7 @@ export default function AdminInterface(props) {
         style={{marginTop: 56, background: 'rgba(255,255,255,0.9)'}}
         open={open}
       >
-        <AdminMenu open={open} />
+        <AdminMenu open={open} setSelected={setPageTitle} />
       </Drawer>
       <Box
         component="main"

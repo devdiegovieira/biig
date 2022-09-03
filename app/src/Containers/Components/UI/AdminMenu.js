@@ -38,9 +38,12 @@ let menuItems = [
 
 
 export default function AdminMenu(props) {
-  let { open = false } = props;
+  let { open = false, setSelected = () => {} } = props;
   let navigate = useNavigate();
 
+  React.useEffect(() => {
+    setSelected(menuItems.find(f => f.link == window.location.pathname).title)
+  }, [setSelected])
 
   return (
     <List component="nav">
@@ -55,7 +58,7 @@ export default function AdminMenu(props) {
           >
             <ListItemButton
               selected={window.location.pathname == m.link}
-              onClick={() => { navigate(m.link) }}
+              onClick={() => { navigate(m.link); setSelected(m.title) }}
               key={i}
             >
               <ListItemIcon>

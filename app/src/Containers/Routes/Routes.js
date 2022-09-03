@@ -6,7 +6,7 @@ import {
   useRoutes
 } from "react-router-dom";
 import Dashboard from "../Pages/Dashboard/Dashboard";
-import AdminInterface from '../../Components/UI/AdminInterface';
+import AdminInterface from '../Components/UI/AdminInterface';
 import Login from "../Pages/Login";
 import defaultTheme from "../../style/defaultTheme"
 
@@ -16,7 +16,7 @@ function Logout() {
 }
 
 function PrivateRoute({children}) {
-  return localStorage.getItem('auth') ? <AdminInterface>{children}</AdminInterface> : <Navigate to="/logout" />
+  return JSON.parse(localStorage.getItem('user')).auth ? <AdminInterface>{children}</AdminInterface> : <Navigate to="/logout" />
 }
 
 function Routes() {

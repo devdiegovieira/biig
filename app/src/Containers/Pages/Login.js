@@ -8,9 +8,10 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import logo from './../../images/biigLogo.png';
-import Copyright from './../../Components/UI/Copyright';
+import Copyright from './../Components/UI/Copyright';
 import { useNavigate } from 'react-router-dom';
 import api from '../../api';
+import SHA256 from 'crypto-js/sha256';
 
 export default function Login() {
   let navigate = useNavigate();
@@ -19,13 +20,15 @@ export default function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    api.post('auth/login', loginData).then(ret => {
-      localStorage.setItem('auth', ret.data)
-      navigate('/admin');
-  
-    }).catch(err => {
-      console.log(err)
-    })
+    api.post('auth/login', {...loginData, password: (SHA256(loginData.password)).toString()})
+      .then(ret => {
+        localStorage.setItem('user', JSON.stringify(ret.data))
+        navigate('/admin');
+    
+      })
+      .catch(err => {
+        console.log(err)
+      })
 
   };
 
@@ -40,11 +43,24 @@ export default function Login() {
           alignItems: 'center',
         }}
       >
-        <img style={{ height: 100, marginBottom: 10 }} src={logo} alt={'logo'} />
-        <Typography component="h1" variant="h5">
+        <img 
+          style={{ height: 100, marginBottom: 10 }} 
+          src={logo} 
+          alt={'logo'} 
+        />
+        
+        <Typography 
+          component="h1" 
+          variant="h5"
+        >
           Efetuar o login
         </Typography>
-        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+        
+        <Box 
+          component="form" 
+          onSubmit={handleSubmit} 
+          noValidate sx={{ mt: 1 }}
+        >
           <TextField
             margin="normal"
             required
@@ -54,8 +70,10 @@ export default function Login() {
             name="email"
             autoComplete="email"
             autoFocus
+            value={loginData.mail || ''}
             onChange={e => setLoginData({...loginData, mail: e.target.value})}
           />
+
           <TextField
             margin="normal"
             required
@@ -65,12 +83,21 @@ export default function Login() {
             type="password"
             id="password"
             autoComplete="current-password"
+            value={loginData.password || ''}
             onChange={e => setLoginData({...loginData, password: e.target.value})}
           />
+
           <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
+            control={
+              <Checkbox 
+                value="remember" 
+                color="primary"
+                onChange={e => setLoginData({...loginData, remember: e.target.value})}
+              />
+            }
             label="Manter logado"
           />
+
           <Button
             type="submit"
             fullWidth
