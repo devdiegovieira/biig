@@ -13,6 +13,7 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import { Avatar, Typography } from '@mui/material';
 import logo from './../../../images/biigLogo.png';
 import AdminMenu from './AdminMenu';
+import AccountMenu from './UserMenu';
 
 const drawerWidth = 200;
 
@@ -55,14 +56,15 @@ export default function AdminInterface(props) {
     setOpen(!open);
   };
 
+  const [userMenu, setUserMenu] = React.useState(null);
   const [pageTitle, setPageTitle] = React.useState('');
 
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
       <AppBar 
-        style={{ background: 'rgba(255,255,255,0.9)', position: 'fixed', zIndex: 1400 }} 
-        sx={{ boxShadow: 'none' }} 
+        style={{ background: 'rgba(255,255,255,0.9)', position: 'fixed',  }} 
+        sx={{ boxShadow: 0 }} 
         
         open={open}
       >
@@ -89,13 +91,17 @@ export default function AdminInterface(props) {
               <NotificationsIcon />
             </Badge>
           </IconButton>
-          <IconButton style={{ marginLeft: 10 }}>
+          <IconButton 
+            style={{ marginLeft: 10 }}
+            onClick={e => setUserMenu({...e})}
+          >
             <Avatar
-              alt="Remy Sharp"
+              alt={JSON.parse(localStorage.getItem('user')).name}
               src={JSON.parse(localStorage.getItem('user')).picture}
               sx={{ width: 40, height: 40 }}
             />
           </IconButton>
+          <AccountMenu event={userMenu} />
         </Toolbar>
       </AppBar>
       <Drawer 
@@ -119,6 +125,7 @@ export default function AdminInterface(props) {
         }}
       >
         <Toolbar />
+        
         <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
           {children}
         </Container>

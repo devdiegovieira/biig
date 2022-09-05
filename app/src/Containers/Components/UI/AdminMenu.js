@@ -25,15 +25,7 @@ let menuItems = [
     title: 'Financeiro',
     icon: 'payments',
     link: '/admin/payments'
-  },
-  {
-    title: '-'
-  },
-  {
-    title: 'Sair',
-    icon: 'logout',
-    link: '/logout'
-  },
+  }
 ]
 
 

@@ -14,7 +14,7 @@ const privateRoute = async (req, res, next) => {
 
 
 const createAuth = async (userData = {}) => {
-  return await jwt.sign(userData, chavePrivada, {expiresIn: '24h'});
+  return await jwt.sign(userData, private, {expiresIn: '12h'});
 }
 
 module.exports = { privateRoute, createAuth }

@@ -1,4 +1,5 @@
 const express = require('express');
+const { createAuth } = require('../lib/auth');
 const router = express.Router();
 
 
@@ -15,11 +16,11 @@ router.post('/login', async (req, res, next) => {
 
     delete user.password;
 
-    return createAuth(user);
+    res.status(200).json({...user, auth: await createAuth(user)});
 
   } catch (error) {
     next(error)
   }
-});
+}); 
 
 module.exports = router;

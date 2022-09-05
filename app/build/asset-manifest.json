@@ -1,11 +1,14 @@
 {
   "files": {
-    "main.js": "/static/js/main.0a7bff3f.js",
+    "main.css": "/static/css/main.616e0428.css",
+    "main.js": "/static/js/main.46376898.js",
     "static/media/biigLogo.png": "/static/media/biigLogo.f9bdf33c409a8c91c85f.png",
     "index.html": "/index.html",
-    "main.0a7bff3f.js.map": "/static/js/main.0a7bff3f.js.map"
+    "main.616e0428.css.map": "/static/css/main.616e0428.css.map",
+    "main.46376898.js.map": "/static/js/main.46376898.js.map"
   },
   "entrypoints": [
-    "static/js/main.0a7bff3f.js"
+    "static/css/main.616e0428.css",
+    "static/js/main.46376898.js"
   ]
 }
