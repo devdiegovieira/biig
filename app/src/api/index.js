@@ -5,7 +5,7 @@ let instance = axios.create({
   baseURL: `http://${!process.env.NODE_ENV || process.env.NODE_ENV === 'development' ? 'localhost' : '35.198.58.103'}:2530`,
   // timeout: 1000,
   headers: {
-    'Authorization': JSON.parse(localStorage.getItem('user')).auth 
+    'Authorization': (JSON.parse(localStorage.getItem('user')) || {}).auth 
   }
 });
 
