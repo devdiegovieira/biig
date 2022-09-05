@@ -30,7 +30,7 @@ let menuItems = [
 
 
 export default function AdminMenu(props) {
-  let { open = false, setSelected = () => {} } = props;
+  let { open = false, setSelected = () => {}, toggleDrawer } = props;
   let navigate = useNavigate();
 
   React.useEffect(() => {
@@ -50,7 +50,7 @@ export default function AdminMenu(props) {
           >
             <ListItemButton
               selected={window.location.pathname == m.link}
-              onClick={() => { navigate(m.link); setSelected(m.title) }}
+              onClick={() => { navigate(m.link); setSelected(m.title); toggleDrawer(false) }}
               key={i}
             >
               <ListItemIcon>

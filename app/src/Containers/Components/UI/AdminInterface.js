@@ -43,7 +43,9 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
           duration: theme.transitions.duration.leavingScreen,
         }),
         width: theme.spacing(7),
-
+        [theme.breakpoints.down('sm')]: {
+          width: 0
+        }
       }),
     },
   }),
@@ -52,8 +54,8 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 export default function AdminInterface(props) {
   const { children } = props;
   const [open, setOpen] = React.useState(false);
-  const toggleDrawer = () => {
-    setOpen(!open);
+  const toggleDrawer = (toggle = undefined) => {
+    setOpen(toggle != undefined ? toggle : !open);
   };
 
   const [userMenu, setUserMenu] = React.useState(null);
@@ -68,7 +70,7 @@ export default function AdminInterface(props) {
         
         open={open}
       >
-        <Toolbar style={{ paddingLeft: 20, paddingRight: 10 }}>
+        <Toolbar style={{ paddingLeft: 20, paddingRight: 10 }} variant="dense">
           <IconButton
             edge="start"
             aria-label="open drawer"
@@ -107,10 +109,10 @@ export default function AdminInterface(props) {
       <Drawer 
         variant="permanent" 
         PaperProps={{style: {border: 'none'}}}
-        style={{marginTop: 56, background: 'rgba(255,255,255,0.9)'}}
+        style={{marginTop: 49, background: 'rgba(255,255,255,0.9)'}}
         open={open}
       >
-        <AdminMenu open={open} setSelected={setPageTitle} />
+        <AdminMenu open={open} setSelected={setPageTitle} toggleDrawer={toggleDrawer} />
       </Drawer>
       <Box
         component="main"
@@ -124,7 +126,7 @@ export default function AdminInterface(props) {
           overflow: 'auto',
         }}
       >
-        <Toolbar />
+        <Toolbar variant="dense"/>
         
         <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
           {children}

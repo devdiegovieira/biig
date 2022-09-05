@@ -2,7 +2,7 @@ const axios = require('axios').default;
 const { toast } = require('react-toastify');
 
 let instance = axios.create({
-  baseURL: `http://${!process.env.NODE_ENV || process.env.NODE_ENV === 'development' ? 'localhost' : '35.198.58.103'}:2530`,
+  baseURL: !process.env.NODE_ENV || process.env.NODE_ENV === 'development' ? 'http://localhost:2530' : 'https://api.biig.com.br',
   // timeout: 1000,
   headers: {
     'Authorization': (JSON.parse(localStorage.getItem('user')) || {}).auth 
