@@ -13,6 +13,7 @@ import { useNavigate } from 'react-router-dom';
 import api from '../../api';
 import SHA256 from 'crypto-js/sha256';
 import { CircularProgress } from '@mui/material';
+import { toast } from 'react-toastify';
 
 export default function Login() {
 
@@ -34,6 +35,8 @@ export default function Login() {
       })
       .catch(err => {
         setLoading(false);
+        toast.error(err)
+
       })
 
   };

@@ -18,14 +18,14 @@ import AccountMenu from './UserMenu';
 const drawerWidth = 200;
 
 const AppBar = styled(MuiAppBar)(({ theme }) => ({
-  zIndex: theme.zIndex.drawer + 1,
+  // zIndex: theme.zIndex.drawer + 1,
   transition: theme.transitions.create(['width', 'margin'], {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
   })
 }));
 
-const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
+const MiniDrawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
   ({ theme, open }) => ({
     '& .MuiDrawer-paper': {
       position: 'relative',
@@ -64,17 +64,17 @@ export default function AdminInterface(props) {
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <AppBar 
-        style={{ background: 'rgba(255,255,255,0.9)', position: 'fixed',  }} 
-        sx={{ boxShadow: 0 }} 
-        
+      <AppBar
+        style={{ background: 'rgba(255,255,255,0.9)', position: 'fixed', }}
+        sx={{ boxShadow: 0 }}
+
         open={open}
       >
         <Toolbar style={{ paddingLeft: 20, paddingRight: 10 }} variant="dense">
           <IconButton
             edge="start"
             aria-label="open drawer"
-            onClick={toggleDrawer}
+            onClick={() => toggleDrawer()}
           >
             <MenuIcon />
           </IconButton>
@@ -93,9 +93,9 @@ export default function AdminInterface(props) {
               <NotificationsIcon />
             </Badge>
           </IconButton>
-          <IconButton 
+          <IconButton
             style={{ marginLeft: 10 }}
-            onClick={e => setUserMenu({...e})}
+            onClick={e => setUserMenu({ ...e })}
           >
             <Avatar
               alt={JSON.parse(localStorage.getItem('user')).name}
@@ -106,28 +106,34 @@ export default function AdminInterface(props) {
           <AccountMenu event={userMenu} />
         </Toolbar>
       </AppBar>
-      <Drawer 
-        variant="permanent" 
-        PaperProps={{style: {border: 'none'}}}
-        style={{marginTop: 49, background: 'rgba(255,255,255,0.9)'}}
+      <MiniDrawer
+        variant="permanent"
+        PaperProps={{ style: { border: 'none' } }}
+        style={{ marginTop: 49, background: 'rgba(255,255,255,0.9)' }}
         open={open}
       >
         <AdminMenu open={open} setSelected={setPageTitle} toggleDrawer={toggleDrawer} />
-      </Drawer>
+      </MiniDrawer>
+      {/* <MuiDrawer
+        variant='temporary'
+        open={open}
+      >
+        <AdminMenu open={open} setSelected={setPageTitle} toggleDrawer={toggleDrawer} />
+      </MuiDrawer> */}
       <Box
         component="main"
         sx={{
           backgroundColor: (theme) =>
             theme.palette.mode === 'light'
-              ? theme.palette.grey[50]
+              ? '#F9F9F9'
               : theme.palette.grey[900],
           flexGrow: 1,
           height: '100vh',
           overflow: 'auto',
         }}
       >
-        <Toolbar variant="dense"/>
-        
+        <Toolbar variant="dense" />
+
         <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
           {children}
         </Container>
