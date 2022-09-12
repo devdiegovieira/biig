@@ -14,6 +14,10 @@ import {
   styled,
   Typography
 } from '@mui/material';
+import Carousel from 'nuka-carousel';
+
+import meliLogo from './../../../images/meli.png';
+import biigLogo from './../../../images/biigLogo.png';
 
 
 function OrderBy() {
@@ -122,50 +126,92 @@ export default function PublishPage() {
               <Grid item key={i} sm={6} md={4} lg={4}>
                 <Card
                   elevation={1}
-                  // onClick={() => { alert('cliquei') }}
+                // onClick={() => { alert('cliquei') }}
                 >
                   <Grid container >
                     <Grid item xs={12}>
-
-                      <img src={'https://http2.mlstatic.com/D_NQ_NP_846014-MLB51004035955_082022-W.webps'} style={{ width: '100%' }} />
-                    </Grid>
-
-                    <Grid item style={{ padding: 20 }}>
-                      <p style={{ fontSize: 23, margin: 0, fontWeight: 500 }}>
-                        R$ 1.350,00
-                      </p>
-
-                      <p style={{ fontSize: 11, margin: 0 }}>25 Vendas | 52 disponíveis</p>
-                    </Grid>
-
-                    <Grid item >
-
-                      <IconButton
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          console.log('aiaia')
-                        }}
-                        size='small'
-                        className='showOnHover'
-
-
+                      <Carousel 
+                        defaultControlsConfig={{pagingDotsClassName: 'showOnHover'}}
+                        renderCenterLeftControls={({ previousDisabled, previousSlide }) => (
+                          <IconButton 
+                            onClick={previousSlide} 
+                            disabled={previousDisabled} 
+                            className='showOnHover'
+                          >
+                            <Icon>chevron_left</Icon>
+                          </IconButton>
+                        )}
+                        renderCenterRightControls={({ nextDisabled, nextSlide }) => (
+                          <IconButton 
+                            onClick={nextSlide} 
+                            disabled={nextDisabled} 
+                            className='showOnHover'
+                          >
+                            <Icon>chevron_right</Icon>
+                          </IconButton>
+                        )}
                       >
-                        <Icon>edit</Icon>
-                      </IconButton>
+                        <img src={'https://http2.mlstatic.com/D_NQ_NP_846014-MLB51004035955_082022-W.webps'} style={{ width: '100%' }} />
+                        <img src={'https://http2.mlstatic.com/D_NQ_NP_846014-MLB51004035955_082022-W.webps'} style={{ width: '100%' }} />
+                        <img src={'https://http2.mlstatic.com/D_NQ_NP_846014-MLB51004035955_082022-W.webps'} style={{ width: '100%' }} />
+                      </Carousel>
+
+                    </Grid>
+
+                    <Grid item xs={12} style={{ padding: 20 }}>
+                      <Grid container>
+
+                        <Grid item xs={12}>
+                          <p style={{ fontSize: 11, margin: 0 }}>#FIAT000001</p>
+                          <p style={{ fontSize: 23, margin: 0, fontWeight: 500 }}>
+                            R$ 1.350,00
+                          </p>
+
+                          <p style={{ fontSize: 11, margin: 0 }}>25 Vendas | 52 disponíveis</p>
+                        </Grid>
+
+                        <Grid item >
+                          <img src={biigLogo} disabled style={{ height: 19, marginRight: 15, marginTop: 8 }} />
+                        </Grid>
+
+                        <Grid item >
+                          <img src={meliLogo} disabled style={{ height: 17, marginRight: 10, marginTop: 9, opacity: 0.2 }} />
+                        </Grid>
+
+                        <Grid item >
+
+                          <IconButton
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              console.log('aiaia')
+                            }}
+                            size='small'
+                            className='showOnHover'
+
+
+                          >
+                            <Icon>edit</Icon>
+                          </IconButton>
+                        </Grid>
+                        <Grid item>
+                          <IconButton
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              console.log('aiaia')
+                            }}
+                            size='small'
+                            className='showOnHover'
+
+                          >
+                            <Icon>delete</Icon>
+                          </IconButton>
+                        </Grid>
+
                       </Grid>
-                      <Grid item>
-                      <IconButton 
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          console.log('aiaia')
-                        }}
-                        size='small'
-                        className='showOnHover'
 
-                      >
-                        <Icon>delete</Icon>
-                      </IconButton>
+
                     </Grid>
+
 
                   </Grid>
 
