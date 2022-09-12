@@ -10,7 +10,7 @@ import Badge from '@mui/material/Badge';
 import Container from '@mui/material/Container';
 import MenuIcon from '@mui/icons-material/Menu';
 import NotificationsIcon from '@mui/icons-material/Notifications';
-import { Avatar, Typography } from '@mui/material';
+import { Avatar, Hidden, Icon, Typography } from '@mui/material';
 import logo from './../../../images/biigLogo.png';
 import AdminMenu from './AdminMenu';
 import AccountMenu from './UserMenu';
@@ -18,6 +18,8 @@ import AccountMenu from './UserMenu';
 const drawerWidth = 200;
 
 const AppBar = styled(MuiAppBar)(({ theme }) => ({
+  background: 'rgba(255,255,255,0.9)',
+  position: 'fixed',
   // zIndex: theme.zIndex.drawer + 1,
   transition: theme.transitions.create(['width', 'margin'], {
     easing: theme.transitions.easing.sharp,
@@ -65,9 +67,7 @@ export default function AdminInterface(props) {
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
       <AppBar
-        style={{ background: 'rgba(255,255,255,0.9)', position: 'fixed', }}
         sx={{ boxShadow: 0 }}
-
         open={open}
       >
         <Toolbar style={{ paddingLeft: 20, paddingRight: 10 }} variant="dense">
@@ -106,20 +106,38 @@ export default function AdminInterface(props) {
           <AccountMenu event={userMenu} />
         </Toolbar>
       </AppBar>
-      <MiniDrawer
-        variant="permanent"
-        PaperProps={{ style: { border: 'none' } }}
-        style={{ marginTop: 49, background: 'rgba(255,255,255,0.9)' }}
-        open={open}
-      >
-        <AdminMenu open={open} setSelected={setPageTitle} toggleDrawer={toggleDrawer} />
-      </MiniDrawer>
-      {/* <MuiDrawer
-        variant='temporary'
-        open={open}
-      >
-        <AdminMenu open={open} setSelected={setPageTitle} toggleDrawer={toggleDrawer} />
-      </MuiDrawer> */}
+
+      <Hidden smDown>
+        <MiniDrawer
+          variant="permanent"
+          PaperProps={{ style: { border: 'none' } }}
+          style={{ marginTop: 49, background: 'rgba(255,255,255,0.9)' }}
+          open={open}
+        >
+          <AdminMenu open={open} setSelected={setPageTitle} toggleDrawer={toggleDrawer} />
+        </MiniDrawer>
+      </Hidden>
+
+      <Hidden smUp>
+        <MuiDrawer
+          variant='temporary'
+          open={open}
+          onClose={() => { setOpen(false) }}
+        >
+
+          <Toolbar style={{ paddingLeft: 20, paddingRight: 10, width: drawerWidth + 50 }} variant="dense">
+            <IconButton
+              edge="start"
+              aria-label="close drawer"
+              onClick={() => toggleDrawer()}
+            >
+              <Icon>close</Icon>
+            </IconButton>
+          </Toolbar>
+          <AdminMenu open={open} setSelected={setPageTitle} toggleDrawer={toggleDrawer} />
+        </MuiDrawer>
+      </Hidden>
+
       <Box
         component="main"
         sx={{
