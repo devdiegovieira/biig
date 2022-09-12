@@ -123,7 +123,7 @@ export default function PublishPage() {
 
           {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17].map((m, i) => {
             return (
-              <Grid item key={i} sm={6} md={4} lg={4}>
+              <Grid item key={i} xs={6} md={4} lg={4}>
                 <Card
                   elevation={1}
                 // onClick={() => { alert('cliquei') }}
@@ -136,7 +136,7 @@ export default function PublishPage() {
                           <IconButton 
                             onClick={previousSlide} 
                             disabled={previousDisabled} 
-                            className='showOnHover'
+                            className='showOnHover'                            
                           >
                             <Icon>chevron_left</Icon>
                           </IconButton>
@@ -150,10 +150,11 @@ export default function PublishPage() {
                             <Icon>chevron_right</Icon>
                           </IconButton>
                         )}
+                       
                       >
-                        <img src={'https://http2.mlstatic.com/D_NQ_NP_846014-MLB51004035955_082022-W.webps'} style={{ width: '100%' }} />
-                        <img src={'https://http2.mlstatic.com/D_NQ_NP_846014-MLB51004035955_082022-W.webps'} style={{ width: '100%' }} />
-                        <img src={'https://http2.mlstatic.com/D_NQ_NP_846014-MLB51004035955_082022-W.webps'} style={{ width: '100%' }} />
+                        <img src={'https://http2.mlstatic.com/D_NQ_NP_846014-MLB51004035955_082022-W.webps'}  style={{  objectFit: 'cover', height: '100%', width: '100%'  }}  />
+                        <img src={'https://www.istoedinheiro.com.br/wp-content/uploads/sites/17/2022/07/mobi-like-0001-e1657719893127.jpg'} style={{  objectFit: 'cover', height: '100%', width: '100%'  }} />
+                        <img src={'https://s2.glbimg.com/JVJLdKWQSMJLYLv2zjMa47mnqb4=/0x0:2048x1366/924x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_cf9d035bf26b4646b105bd958f32089d/internal_photos/bs/2022/Z/V/GuFjgdRA6onQKmmjuH9g/kwid-intense-04.jpg'} style={{  objectFit: 'cover', height: '100%', width: '100%'  }} />
                       </Carousel>
 
                     </Grid>
