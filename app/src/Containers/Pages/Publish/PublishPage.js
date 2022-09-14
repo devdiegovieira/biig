@@ -11,32 +11,36 @@ import {
   MenuItem,
   Paper,
   Select,
-  styled,
-  Typography
+  styled
 } from '@mui/material';
 import Carousel from 'nuka-carousel';
 
 import meliLogo from './../../../images/meli.png';
 import biigLogo from './../../../images/biigLogo.png';
+import ButtonDefault from '../../Components/Form/ButtonDefault';
 
 
 function OrderBy() {
   return (
-    <FormControl fullWidth>
-      <InputLabel id="demo-simple-select-label">Ordenar por</InputLabel>
-      <Select
-        value={10}
-        onChange={() => { }}
-        // displayEmpty
-        size='small'
-        label='Ordenar por'
+    <ButtonDefault
+      endIcon={<Icon >swap_vert</Icon>}
+      title='Mais Vendidos Primeiro'
+    />
+    // <FormControl fullWidth>
+    //   <InputLabel id="demo-simple-select-label">Ordenar por</InputLabel>
+    //   <Select
+    //     value={10}
+    //     onChange={() => { }}
+    //     // displayEmpty
+    //     size='small'
+    //     label='Ordenar por'
 
-      >
-        <MenuItem value={10}>Ten</MenuItem>
-        <MenuItem value={20}>Twenty</MenuItem>
-        <MenuItem value={30}>Thirty</MenuItem>
-      </Select>
-    </FormControl>
+    //   >
+    //     <MenuItem value={10}>Ten</MenuItem>
+    //     <MenuItem value={20}>Twenty</MenuItem>
+    //     <MenuItem value={30}>Thirty</MenuItem>
+    //   </Select>
+    // </FormControl>
   )
 }
 
@@ -101,19 +105,23 @@ export default function PublishPage() {
         />
         <IconButton type='submit' style={{marginLeft: 5}}><Icon>search</Icon></IconButton> */}
 
-              <Grid container justifyContent={'flex-end'}>
-                <Grid item xs={6}>
+              <Grid container justifyContent={'flex-end'} spacing={1}>
+                <Grid item >
 
                   <OrderBy />
                 </Grid>
                 <Grid item>
-                  <Button
+                  <ButtonDefault
                     variant='outlined'
-                    // size='small''
-                    style={{ textTransform: 'none', marginLeft: 5, height: 40 }}
-                  >
-                    Filtros <Badge badgeContent={4} color='secondary' style={{ marginLeft: 15, marginRight: 8 }} />
-                  </Button>
+                    title='Filtros'
+                    endIcon={
+                      <Badge
+                        badgeContent={4}
+                        color='secondary'
+                        style={{ marginLeft: 10, marginRight: 8 }}
+                      />
+                    }
+                  />
                 </Grid>
 
               </Grid>
@@ -130,31 +138,31 @@ export default function PublishPage() {
                 >
                   <Grid container >
                     <Grid item xs={12}>
-                      <Carousel 
-                        defaultControlsConfig={{pagingDotsClassName: 'showOnHover'}}
+                      <Carousel
+                        defaultControlsConfig={{ pagingDotsClassName: 'showOnHover' }}
                         renderCenterLeftControls={({ previousDisabled, previousSlide }) => (
-                          <IconButton 
-                            onClick={previousSlide} 
-                            disabled={previousDisabled} 
-                            className='showOnHover'                            
+                          <IconButton
+                            onClick={previousSlide}
+                            disabled={previousDisabled}
+                            className='showOnHover'
                           >
                             <Icon>chevron_left</Icon>
                           </IconButton>
                         )}
                         renderCenterRightControls={({ nextDisabled, nextSlide }) => (
-                          <IconButton 
-                            onClick={nextSlide} 
-                            disabled={nextDisabled} 
+                          <IconButton
+                            onClick={nextSlide}
+                            disabled={nextDisabled}
                             className='showOnHover'
                           >
                             <Icon>chevron_right</Icon>
                           </IconButton>
                         )}
-                       
+
                       >
-                        <img loading="lazy" src={'https://http2.mlstatic.com/D_NQ_NP_846014-MLB51004035955_082022-W.webps'}  style={{  objectFit: 'cover', height: '100%', width: '100%'  }}  />
-                        <img loading="lazy" src={'https://www.istoedinheiro.com.br/wp-content/uploads/sites/17/2022/07/mobi-like-0001-e1657719893127.jpg'} style={{  objectFit: 'cover', height: '100%', width: '100%'  }} />
-                        <img loading="lazy" src={'https://s2.glbimg.com/JVJLdKWQSMJLYLv2zjMa47mnqb4=/0x0:2048x1366/924x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_cf9d035bf26b4646b105bd958f32089d/internal_photos/bs/2022/Z/V/GuFjgdRA6onQKmmjuH9g/kwid-intense-04.jpg'} style={{  objectFit: 'cover', height: '100%', width: '100%'  }} />
+                        <img loading="lazy" src={'https://http2.mlstatic.com/D_NQ_NP_846014-MLB51004035955_082022-W.webps'} style={{ objectFit: 'cover', height: '100%', width: '100%' }} />
+                        <img loading="lazy" src={'https://www.istoedinheiro.com.br/wp-content/uploads/sites/17/2022/07/mobi-like-0001-e1657719893127.jpg'} style={{ objectFit: 'cover', height: '100%', width: '100%' }} />
+                        <img loading="lazy" src={'https://s2.glbimg.com/JVJLdKWQSMJLYLv2zjMa47mnqb4=/0x0:2048x1366/924x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_cf9d035bf26b4646b105bd958f32089d/internal_photos/bs/2022/Z/V/GuFjgdRA6onQKmmjuH9g/kwid-intense-04.jpg'} style={{ objectFit: 'cover', height: '100%', width: '100%' }} />
                       </Carousel>
 
                     </Grid>
