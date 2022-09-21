@@ -10,10 +10,11 @@ import Badge from '@mui/material/Badge';
 import Container from '@mui/material/Container';
 import MenuIcon from '@mui/icons-material/Menu';
 import NotificationsIcon from '@mui/icons-material/Notifications';
-import { Avatar, Hidden, Icon, Typography } from '@mui/material';
+import { Avatar, Hidden, Icon, Slide, Typography } from '@mui/material';
 import logo from './../../../images/biigLogo.png';
 import AdminMenu from './AdminMenu';
 import AccountMenu from './UserMenu';
+import useScrollTrigger from '@mui/material/useScrollTrigger';
 
 const drawerWidth = 200;
 
@@ -53,6 +54,20 @@ const MiniDrawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'op
   }),
 );
 
+
+function HideOnScroll(props) {
+  const { children, window } = props;
+  const trigger = useScrollTrigger({
+    target: window ? window() : undefined,
+  });
+
+  return (
+    <Slide appear={false} direction="down" in={!trigger}>
+      {children}
+    </Slide>
+  );
+}
+
 export default function AdminInterface(props) {
   const { children } = props;
   const [open, setOpen] = React.useState(false);
@@ -66,46 +81,49 @@ export default function AdminInterface(props) {
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <AppBar
-        sx={{ boxShadow: 0 }}
-        open={open}
-      >
-        <Toolbar style={{ paddingLeft: 20, paddingRight: 10 }} variant="dense">
-          <IconButton
-            edge="start"
-            aria-label="open drawer"
-            onClick={() => toggleDrawer()}
-          >
-            <MenuIcon />
-          </IconButton>
-          <img style={{ height: 35, marginLeft: 10, marginRight: 20 }} src={logo} alt={'logo'} />
-          <Typography
-            component="h1"
-            variant="h6"
-            color="GrayText"
-            noWrap
-            sx={{ flexGrow: 1 }}
-          >
-            {pageTitle}
-          </Typography>
-          <IconButton >
-            <Badge badgeContent={4} color="primary">
-              <NotificationsIcon />
-            </Badge>
-          </IconButton>
-          <IconButton
-            style={{ marginLeft: 10 }}
-            onClick={e => setUserMenu({ ...e })}
-          >
-            <Avatar
-              alt={JSON.parse(localStorage.getItem('user')).name}
-              src={JSON.parse(localStorage.getItem('user')).picture}
-              sx={{ width: 40, height: 40 }}
-            />
-          </IconButton>
-          <AccountMenu event={userMenu} />
-        </Toolbar>
-      </AppBar>
+      <HideOnScroll {...props}>
+        <AppBar
+          sx={{ boxShadow: 0 }}
+           // open={open}
+        >
+          <Toolbar style={{ paddingLeft: 20, paddingRight: 10 }} variant="dense">
+            <IconButton
+              edge="start"
+              aria-label="open drawer"
+              onClick={() => toggleDrawer()}
+            >
+              <MenuIcon />
+            </IconButton>
+            <img style={{ height: 35, marginLeft: 10, marginRight: 20 }} src={logo} alt={'logo'} />
+            <Typography
+              component="h1"
+              variant="h6"
+              color="GrayText"
+              noWrap
+              sx={{ flexGrow: 1 }}
+            >
+              {pageTitle}
+            </Typography>
+            <IconButton >
+              <Badge badgeContent={4} color="primary">
+                <NotificationsIcon />
+              </Badge>
+            </IconButton>
+            <IconButton
+              style={{ marginLeft: 10 }}
+              onClick={e => setUserMenu({ ...e })}
+            >
+              <Avatar
+                alt={JSON.parse(localStorage.getItem('user')).name}
+                src={JSON.parse(localStorage.getItem('user')).picture}
+                sx={{ width: 40, height: 40 }}
+              />
+            </IconButton>
+            <AccountMenu event={userMenu} />
+          </Toolbar>
+        </AppBar>
+      </HideOnScroll>
+
 
       <Hidden smDown>
         <MiniDrawer
@@ -141,10 +159,10 @@ export default function AdminInterface(props) {
       <Box
         component="main"
         sx={{
-          backgroundColor: (theme) =>
-            theme.palette.mode === 'light'
-              ? '#F9F9F9'
-              : theme.palette.grey[900],
+          // backgroundColor: (theme) =>
+          //   theme.palette.mode === 'light'  
+          //     ? '#F9F9F9'
+          //     : theme.palette.grey[900],
           flexGrow: 1,
           height: '100vh',
           overflow: 'auto',

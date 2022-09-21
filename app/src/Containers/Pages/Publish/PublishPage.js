@@ -145,6 +145,8 @@ export default function PublishPage() {
                             onClick={previousSlide}
                             disabled={previousDisabled}
                             className='showOnHover'
+                            size='small'
+                            style={{backgroundColor: 'rgba(255, 255, 255, 0.2)', marginLeft: 5}}
                           >
                             <Icon>chevron_left</Icon>
                           </IconButton>
@@ -154,6 +156,8 @@ export default function PublishPage() {
                             onClick={nextSlide}
                             disabled={nextDisabled}
                             className='showOnHover'
+                            style={{backgroundColor: 'rgba(255, 255, 255, 0.2)', marginRight: 5}}
+                            size='small'
                           >
                             <Icon>chevron_right</Icon>
                           </IconButton>
